@@ -92,7 +92,7 @@ resource "aws_security_group_rule" "vpn" {
   from_port         = 0
   to_port           = 65535
   protocol          = "tcp"
-  cidr_blocks =  ["${chomp(data.http.icanhazip.body)}"]
+  cidr_blocks =  ["${chomp(data.http.myip.body)}/32"]
   security_group_id = module.vpn_sg.security_group_id
 }
 resource "aws_security_group_rule" "mongodb_catalogue" {
