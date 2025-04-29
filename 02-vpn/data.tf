@@ -10,6 +10,7 @@ data "aws_ssm_parameter" "vpn_sg_id" {
 }
 data "aws_ami" "devops-ami" {
   most_recent      = true
+  name_regex = "Centos-8-DevOps-Practice"
   owners           = ["973714476881"]
 
   filter {
