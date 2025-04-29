@@ -28,3 +28,4 @@ data "aws_ssm_parameter" "catalogue_sg_id" {
 
 data "aws_ssm_parameter" "private_subnet_ids" {
    name = "/${var.project_name}/${var.env}/private_subnet_ids"
+}
