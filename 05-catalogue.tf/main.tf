@@ -63,3 +63,30 @@ resource "aws_autoscaling_group" "catalogue" {
     propagate_at_launch = false
   }
 }
+
+resource "aws_autoscaling_policy" "catalogue" {
+  autoscaling_group_name = aws_autoscaling_group.catalogue.name
+  name                   = "cpu"
+  policy_type            = "TargetTrackingScaling"
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+    target_value = 50.0
+  }
+}
+
+resource "aws_lb_listener_rule" "health_check" {
+  listener_arn = data.aws_ssm_parameter.aws_lb_listener_arn.value
+  priority = 10
+   action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.catalogue.arn
+  }
+
+  condition {
+    host_header {
+      values = ["catalogue.app.joindevops.top"]
+    }
+  }
+}
