@@ -1,4 +1,4 @@
-resource "aws_lb" "app_alb" {
+resource "aws_lb" "web_alb" {
   name               = "${var.project_name}-${var.common_tags.Component}"
   internal           = false
   load_balancer_type = "application"
@@ -8,4 +8,20 @@ resource "aws_lb" "app_alb" {
   #enable_deletion_protection = true
 
   tags = var.common_tags
+}
+
+resource "aws_lb_listener" "https" {
+  load_balancer_arn = aws_lb.web_alb.arn
+  port              = "443"
+  protocol          = "HTTPS"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "This is the Fixed response from Web-ALB"
+      status_code  = "200"
+    }
+  }
 }
