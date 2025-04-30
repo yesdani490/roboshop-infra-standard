@@ -4,8 +4,8 @@ resource "aws_ssm_parameter" "vpc_id" {
   value = module.vpc.vpc_id
   }
 
-resource "aws_ssm_parameter" "public_subnet_cidr" {
-  name  = "/${var.project_name}/${var.env}/public_subnet_cidr"
+resource "aws_ssm_parameter" "public_subnet_ids" {
+  name  = "/${var.project_name}/${var.env}/public_subnet_ids"
   type  = "StringList"
   value = join(",",module.vpc.public_subnet_ids)
   }
