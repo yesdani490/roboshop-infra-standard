@@ -77,7 +77,7 @@ resource "aws_autoscaling_policy" "catalogue" {
 }
 
 resource "aws_lb_listener_rule" "catalogue" {
-  listener_arn = data.aws_ssm_parameter.aws_alb_listener_arn.value
+  listener_arn = data.aws_ssm_parameter.aws_alb_listener_arn
   priority = 10
    action {
     type             = "forward"
