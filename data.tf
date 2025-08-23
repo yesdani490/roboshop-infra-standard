@@ -30,6 +30,10 @@ data "aws_ssm_parameter" "private_subnet_ids" {
    name = "/${var.project_name}/${var.env}/private_subnet_ids"
 } 
 
+data "aws_ssm_parameter" "web_alb_listener_arn" {
+   name = "/${var.project_name}/${var.env}/web_alb_listener_arn"
+} 
+
 
 
 
