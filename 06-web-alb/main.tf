@@ -45,7 +45,7 @@ resource "aws_acm_certificate_validation" "joindevops" {
 }
 
 
-resource "aws_lb_listener" "https" {
+resource "aws_lb_listener" "frontend" {
   load_balancer_arn = aws_lb.web_alb.arn
   port              = "443"
   protocol          = "HTTPS"
